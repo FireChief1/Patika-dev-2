@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Koleksiyonlar_Soru_3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            /* 
+             Klavyeden girilen cümle içerisindeki 
+             sesli harfleri bir dizi içerisinde saklayan ve dizinin elemanlarını sıralayan programı yazınız.
+            */
+            
+            Console.WriteLine("lütfen cümlenizi girin");
+            string myStr = Console.ReadLine();
+            string newStr = "";
+           
+
+
+            //Kullanıcı boşuk silme
+            for (int i = 0; i < myStr.Length; i++)
+            {
+                if (myStr[i] != ' ')
+                {
+                    newStr=newStr+ myStr[i];
+                }
+            }
+            char [] sesliHarf = { 'a', 'e', 'ı', 'i', 'o', 'ö', 'u', 'ü' };
+
+            List<char> tempMySesliHarf = new List<char>();
+            
+            for (int i = 0; i < newStr.Length; i++)
+            {
+                for (int j= 0; j < sesliHarf.Length; j++)
+                {
+                    if (newStr[i] == sesliHarf[j])
+                    {
+                        tempMySesliHarf.Add(newStr[i]); 
+                    }
+                }
+            }
+
+
+            //list to array
+            char [] mySesliHarf = tempMySesliHarf.ToArray();
+
+            Array.Sort(mySesliHarf);
+            Console.WriteLine("Sıralanmış Sesli Harfler : ");
+            foreach (var item in mySesliHarf)
+            {
+                Console.Write(item);
+            }
+
+           
+
+
+            Console.ReadKey();
+        }
+    }
+}
