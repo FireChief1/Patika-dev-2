@@ -1,0 +1,134 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Koleksiyonlar_Soru_1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            /*
+             Klavyeden girilen 20 adet pozitif sayının asal ve asal olmayan olarak 2 ayrı listeye atın. (ArrayList sınıfını kullanara yazınız.)
+
+               Negatif ve numeric olmayan girişleri engelleyin.++
+               Her bir dizinin elemanlarını büyükten küçüğe olacak şekilde ekrana yazdırın.++
+               Her iki dizinin eleman sayısını ve ortalamasını ekrana yazdırın.++
+             */
+            int itemCounter = 0;
+            int itemCounter1 = 0;
+            int sum = 0;
+            int sum1 = 0;
+            List<int> asalSayılar = new List<int>();
+            List<int> asalOlmayanSayılar = new List<int>();
+
+            Console.WriteLine("Klavyeden 20 tane sayı girin : ");
+
+            for (int i = 1; i <= 20; i++)
+            {
+                label1:
+                Console.WriteLine(i + ".sayı girin : ");
+                string numberr = Console.ReadLine();
+
+                int tempNumber;
+                bool sonuc = int.TryParse(numberr,out tempNumber);
+
+                if (tempNumber < 0 || (sonuc == false))
+                {
+                    Console.WriteLine("Sadece pozitif ve numerik giriş yapın ");
+                    goto label1;
+                }
+               
+                if (primeNumber(tempNumber)=="Asal Sayı")
+                {
+                    asalSayılar.Add(tempNumber);
+
+                }
+                else 
+                {
+                    asalOlmayanSayılar.Add(tempNumber);
+                }
+
+
+                
+            }
+            Console.WriteLine("**************");
+            Console.WriteLine("Asal Sayı Listesi");
+            Console.WriteLine("**************");
+            foreach (var item in asalSayılar)
+            {
+                Console.WriteLine(item);
+                sum=sum+item; 
+                itemCounter=itemCounter+1;  
+            }
+            Console.WriteLine(itemCounter+" tane sayı var");
+            Console.WriteLine("aritmatik ortalama : " + (sum / itemCounter));
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            Console.WriteLine("**************");
+            Console.WriteLine("Asal Sayı Olmayan  Listesi");
+            Console.WriteLine("**************");
+            foreach (var item in asalOlmayanSayılar)
+            {
+                Console.WriteLine(item);
+                sum1 = sum1 + item;
+                itemCounter1 = itemCounter1 + 1;
+            }
+            Console.WriteLine(itemCounter1 + " tane sayı var");
+            Console.WriteLine("aritmatik ortalama : " + (sum1/itemCounter1));
+
+
+            
+            Console.WriteLine("**************");
+            Console.WriteLine("Sıralanmış Asal Sayı Listesi");
+            Console.WriteLine("**************");
+            asalSayılar.Sort();
+            asalSayılar.Reverse();  
+            foreach (var item in asalSayılar)
+            {
+                Console.WriteLine(item);
+            }
+
+
+
+
+            Console.WriteLine("**************");
+            Console.WriteLine("Sıralanmış Asal Sayı Olmayan Listesi");
+            Console.WriteLine("**************");
+            asalOlmayanSayılar.Sort();
+            asalOlmayanSayılar.Reverse();
+            foreach (var item in asalOlmayanSayılar)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadKey();
+        }
+        public static string primeNumber(int a)
+        {
+            
+            string result ="";
+
+            for (int i = 2; i < a; i++)
+            {
+                if (a % i == 0)
+                {
+                    
+                    result = "Asal Sayı Değil";
+                    break;
+                }
+                else if(a % i != 0)
+                {
+                    result = "Asal Sayı";
+  
+                }
+               
+            }
+
+            return result;  
+        }
+    }
+}
